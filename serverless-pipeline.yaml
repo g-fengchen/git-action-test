@@ -7,20 +7,15 @@ triggers:
         filter: 'body.ref in ["refs/heads/tes"]'
     manual_dispatch:
       secret: test
-job:
-  runtime: nodejs12
-  env:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    FIRST_NAME: Mona
-    LAST_NAME: Octocat
-  steps:
-    - name: 'list files'
-      run: |
-        ls -la
-      working-directory: ./
-    - run: |
-        npm install
-      working-directory: ./
-    - run: |
-        npm --version
-      working-directory: ./
+env:
+  name: Heimanba
+  age: 30
+steps:
+  - run: echo 'Hi {{ env.name }}'  # Hi Heimanba
+  - run: echo 'Hi {{ env.name }}'  # Hi Tony
+    env:
+      name: Tony
+  - run: echo 'Hi {{ task_id }}'
+  - run: echo 'Hi {{ app.user_name }}'
+  - run: echo 'Hi {{ git.event_name }}'
+  - run: echo 'suceess end ===='
